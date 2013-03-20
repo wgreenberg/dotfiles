@@ -1,0 +1,14 @@
+"3.5 (created: 2012/08/04 00:41:20)
+
+source! /Users/ifnspifn/.vimperatorrc.local
+
+set smartcase
+
+set editor = mvim
+highlight Hint font: 12px "Andale Mono"; margin: -.2ex; padding: 0 0 0 1px; outline: 1px solid rgba(0, 0, 0, .5); background: rgba(255, 248, 231, .8); color: black; text-transform: uppercase;
+highlight HintElem /* The hintable element */ background-color: yellow; color: black !important;
+s
+set hintchars=awerjiopsd
+
+
+" vim: set ft=vimperator:
