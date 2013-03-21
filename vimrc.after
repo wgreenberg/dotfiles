@@ -1,0 +1,9 @@
+color solarized
+let g:Powerline_symbols = 'fancy'
+set nocompatible
+set laststatus=2
+set t_Co=256
+set background=dark
+
+set backup
+set backupdir=~/.vim/backups
