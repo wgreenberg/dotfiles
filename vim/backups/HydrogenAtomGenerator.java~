@@ -1,0 +1,30 @@
+import java.util.Random;
+
+public class HydrogenAtomGenerator implements Runnable {
+
+	private Random random = new Random();
+	int count = 0;
+	private ChemicalBondingCreator cbc;
+  Thread generatorThread;
+
+	public HydrogenAtomGenerator(ChemicalBondingCreator cbc, Thread genThread) {
+		this.cbc = cbc;
+    this.generatorThread = genThread;
+	}
+
+	@Override
+	public void run() {
+		while (true) {
+			try {
+				Thread.sleep((long) (3000.0 * random.nextDouble()));
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			HydrogenAtom ha = new HydrogenAtom(cbc, count++, generatorThread);
+			Thread thread = new Thread(ha);
+			thread.start();
+		}
+	}
+
+}

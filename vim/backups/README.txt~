@@ -1,0 +1,37 @@
+Will Greenberg
+Assignment 2
+
+-----
+NOTES
+-----
+
+The main program source is in regular_src, while the self-contained
+extra credit implementation is in extra_credit_src. "java -version" reports
+"java version 1.6.0_41" on my computer.
+
+
+-----------
+EXPLANATION
+-----------
+
+My solution to part 5 is to assign a single 'resource' semaphore to each atom.
+This way, I can signal 4 to the Hydrogen semaphore and 1 to the Carbon semaphores
+separately. Part 6 was accomplished by delegating the running on the chemical
+bonding program to newly spawned atoms. This way, whenever a new atom is created,
+it checks to see if a molecule can be made, and if so, triggers the chemical
+bonding thread to run.
+
+
+------------
+EXTRA CREDIT
+------------
+
+For the extra credit (located in extra_credit_src), I allow arbitrary molecules to
+be created in the following way:
+
+    java Main <MoleculeName> <Atom1Number> <Atom1Name> <Atom2Number> <Atom2Name> ...
+
+where MoleculeName and AtomXName are both strings with no spaces, and AtomXNumber
+is an integer. For example,
+
+    java Main Caffeine 8 Carbon 10 Hydrogen 4 Nitrogen 2 Oxygen

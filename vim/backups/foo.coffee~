@@ -1,0 +1,6 @@
+nano.db.destroy 'test', (err) ->
+  console.log 'k!'
+  nano.db.create 'test', ->
+    db = nano.use('test')
+
+

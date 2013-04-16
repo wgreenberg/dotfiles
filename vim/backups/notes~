@@ -1,0 +1,83 @@
+todo:
+  -pair with another to watch whole process
+
+http://apt.endlessdevelopment.com/updates/install/      -- latest prod build
+http://apt.endlessdevelopment.com/demo/install/         -- stable dev
+http://apt.endlessdevelopment.com/apt_testing/install/  -- latest dev build
+user: endlessos
+pass: install
+
+<C-E> in-os, pass is "demonstration" or "apttesting"
+
+may need to scale back cpu, find optimal settings (enable 3D)
+
+write bio due next week
+log hours on daily basis
+tally up hours by tues
+
+------------------
+tech talk mar 12
+
+slow social bar
+firefox tab bug
+localization user stories
+apps in the app store
+  -disable others?
+Mutter
+-----------------
+tech talk mar 19
+
+study GTK, Clutter, mx, GObject introspection
+three routes:
+  -work with Roddy on general issues
+  -work with Matt Watson on photo app / get acquainted with
+   what might be needed for the SDK
+  -pending Matt Dalio's approval, continue developing
+   programming app
+----------------
+mattmeeting mar 20
+
+do blur (many kinds):
+  -tilt shift
+  -circular blur
+  -use numpy/scipy
+
+gtk 3.4: read the docs python gtk: http://python-gtk-3-tutorial.readthedocs.org/en/latest/
+  -gotta adapt from C docs
+  -gobject introspection in python
+implement in image_processing/image_tools.py
+leftToolBar: add new widget
+make widget for blur
+
+repo
+  all changes going to v2, put stuff there
+  change paths
+  python endless-os-photos <photopath>
+
+----------------
+mar 25 rafa meeting
+
+study gtk/clutter
+mark out available time
+set up monday meeting with rafa
+
+-----------------
+apr 2 tech talk
+
+discussing desktop localized url
+-desktop files
+  -eos-common/usr/share/
+    -app store
+    -sites has weblinks
+      -broken into lang files
+      -version: desktop entry spec v
+      -name: translated per folder
+      -comment: in app store, shows description
+      -GenericName: i.e., Name=Firefox, GenericName=WebBrowser
+      -Type: Link/Application/Directory
+      -spec at freedesktop.org
+  -eos-config/etc/endlessm/
+    -desktop.LANG_COUNTRYCODE
+      -copy of this is made into desktop.json in endlessm/home/endlessm/desktop.json(?)
+      -desktop.json drives what's visible on the desktop
+        -entire keys are either "browser" or "APPNAME.desktop"

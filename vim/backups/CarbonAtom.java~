@@ -1,0 +1,48 @@
+public class Atom implements Runnable {
+
+  private ChemicalBondingCreator cbc;
+  private int count;
+
+  public Atom(ChemicalBondingCreator cbc, int count){
+    this.cbc = cbc;
+    this.count = count;
+  }
+
+  @Override
+  public void run(){
+		System.out.println(" atom no: " + count + " created.");
+    try{
+      synchronized (cbc.caMutex) {
+        cbc.caMutex.acquire();
+        cbc.caList.add(this);
+        cbc.caMutex.release();
+      }
+    } catch (Exception e){
+      System.out.println(e);
+    }
+		System.out.println(" atom no: " + count
+				+ " waiting for bonding.");
+    synchronized(this.cbc){
+      if(cbc.bondReady()){
+        generatorThread = new Thread(this.cbc);
+        generatorThread.start();
+      }
+    }
+		try {
+			synchronized (cbc.caWaiton) {
+				cbc.caWaiton.acquire(1);
+        synchronized (cbc.caMutex) {
+          cbc.caMutex.acquire();
+          cbc.caList.remove(this);
+          cbc.caMutex.release();
+        }
+			}
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(" atom no: " + count + " bonded, done.");
+
+  }
+
+}

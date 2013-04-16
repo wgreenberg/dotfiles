@@ -1,0 +1,130 @@
+todo:
+  -pair with another to watch whole process
+
+http://apt.endlessdevelopment.com/updates/install/      -- latest prod build
+http://apt.endlessdevelopment.com/demo/install/         -- stable dev
+http://apt.endlessdevelopment.com/apt_testing/install/  -- latest dev build
+user: endlessos
+pass: install
+
+<C-E> in-os, pass is "demonstration" or "apttesting"
+
+may need to scale back cpu, find optimal settings (enable 3D)
+
+write bio due next week
+log hours on daily basis
+tally up hours by tues
+
+------------------
+tech talk mar 12
+
+slow social bar
+firefox tab bug
+localization user stories
+apps in the app store
+  -disable others?
+Mutter
+-----------------
+tech talk mar 19
+
+study GTK, Clutter, mx, GObject introspection
+three routes:
+  -work with Roddy on general issues
+  -work with Matt Watson on photo app / get acquainted with
+   what might be needed for the SDK
+  -pending Matt Dalio's approval, continue developing
+   programming app
+----------------
+mattmeeting mar 20
+
+do blur (many kinds):
+  -tilt shift
+  -circular blur
+  -use numpy/scipy
+
+gtk 3.4: read the docs python gtk: http://python-gtk-3-tutorial.readthedocs.org/en/latest/
+  -gotta adapt from C docs
+  -gobject introspection in python
+implement in image_processing/image_tools.py
+leftToolBar: add new widget
+make widget for blur
+
+repo
+  all changes going to v2, put stuff there
+  change paths
+  python endless-os-photos <photopath>
+
+----------------
+mar 25 rafa meeting
+
+study gtk/clutter
+mark out available time
+set up monday meeting with rafa
+
+-----------------
+apr 2 tech talk
+
+discussing desktop localized url
+-desktop files
+  -eos-common/usr/share/
+    -app store
+    -sites has weblinks
+      -broken into lang files
+      -version: desktop entry spec v
+      -name: translated per folder
+      -comment: in app store, shows description
+      -GenericName: i.e., Name=Firefox, GenericName=WebBrowser
+      -Type: Link/Application/Directory
+      -spec at freedesktop.org
+  -eos-config/etc/endlessm/
+    -desktop.LANG_COUNTRYCODE
+      -copy of this is made into desktop.json in endlessm/home/endlessm/desktop.json(?)
+      -desktop.json drives what's visible on the desktop
+        -entire keys are either "browser" or "APPNAME.desktop"
+
+---------------
+apr 4 rafa meeting
+
+meeting with collaborat (?) in London for Endless Summit
+work with Philip on SDK -- get in touch, find actions
+  -write widgets in C, write bindings in high language
+  -check out epiphany (webapp wrapper)
+  -research QT (window manager, runtime env, performance)
+places around same endless area (SOMA, Second)
+soma is good, not 6th, harrison, 9th, 8th, 5/4th, mission, height
+find neighborhood that's sunny/cheap
+
+----------------
+apr 9 katie meeting
+
+aim for june 15
+oakland: rockridge (close to berkeley, on bart), berkeley
+in city: hay's valley, if in richmond/sunset, just as difficult as getting from berkeley, the mission (sometimes sketchy)
+credit report printed, work history/references, 1 mo delay between signing and moving (in general)
+
+----------------
+apr 16 tech talk
+
+-testing:
+  -custom jsUnit for Gjs testing
+  -GLib testing for C
+-JS will be the only supported binding
+-example extends, import custom Endless sdk, override/chaining
+  -https://github.com/endlessm/eos-sdk/blob/issues/4/test/smoke-tests/app-window.js
+  -moar: https://git.gnome.org/browse/gjs/tree/test/js/testGObjectClass.js
+  -composition vs subclassing
+    -subclassing is newly supported, so shell uses composition
+  -lookup gobject automatic constructor/destructor
+    -https://git.gnome.org/browse/glib/tree/gobject/gtype.c#n4333
+-devhelp (?) browses gobject docs
+    -----------
+apr 16 rory/matt/philip meeting
+
+-c widgets needed
+  -window, sliding panel
+-cut teeth porting parts of weather app
+  -feel free to cut out irrelevant hunks, redesign, etc
+-me: issue 13, break it down further
+-test harness is in eos-shell
+-/usr/share/gir1.0
+  -makefile defines gi install behavior

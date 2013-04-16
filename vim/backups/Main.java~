@@ -1,0 +1,29 @@
+import java.util.*;
+
+public class Main {
+
+	public static final void main(String args[]) {
+    //args like "Methane 1 Carbon 4 Hydrogen"
+		System.out.println("Project 2");
+
+    HashMap<String, Integer> atomSpec = new HashMap<String, Integer>();
+
+    String molecule = args[0];
+    for(int i=1; i<args.length; i += 2){
+      int numAtoms = Integer.parseInt(args[i]);
+      String atomName = args[i+1];
+      atomSpec.put(atomName, numAtoms);
+    }
+
+		ChemicalBondingCreator cbc = new ChemicalBondingCreator(atomSpec);
+		Thread cbcThread = new Thread(cbc);
+
+		// create the atom generator
+    for(String atom : atomSpec.keySet()){
+      AtomGenerator ag = new AtomGenerator(atom, cbc);
+      Thread thread = new Thread(ag);
+      thread.start();
+    }
+	}
+
+}
