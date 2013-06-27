@@ -32,6 +32,3 @@ ZSH_THEME="minimal"
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
-
-# Customize to your needs...
-export PATH=/Library/Frameworks/Python.framework/Versions/2.7/bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/Users/ifnspifn/.rbenv/shims:/usr/local/Cellar/python/2.7.3/bin:/usr/local/bin:/Users/ifnspifn/.rbenv/shims:/usr/local/share/python:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin
