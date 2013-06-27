@@ -4,6 +4,7 @@ syntax on
 let g:Powerline_symbols='fancy'
 let g:solarized_termcolors=256
 set nocompatible
+set t_Co=16
 set laststatus=2
 set background=dark
 colorscheme solarized
