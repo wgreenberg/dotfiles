@@ -3,6 +3,9 @@ ZSH=$HOME/.oh-my-zsh
 
 bindkey -v
 
+# really fucking tired of autocorrect
+unsetopt correct_all
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -10,16 +13,18 @@ bindkey -v
 ZSH_THEME="minimal"
 alias tmux="export TERM=screen-256color-bce; tmux"
 
-#jhbuild reminder
-if [ -z "$UNDER_JHBUILD" ]; then
-  insults=('gluttonous' 'glutenous' 'flatulent' 'boil-brained' 'onion-eyed' 'overly hirsute' 'craven' 'raving' 'rancid' 'rank' 'cantankerous' 'pulchritudinous' 'moldy' 'molting' 'goat-kneading' 'MATLAB-loving' 'saucy' 'spicy' 'defenestrating' 'git-hating')
-  num_insults=${#insults[*]}
+# jhbuild's gstreamer ain't got mp3 going for it
+alias muzak="sudo su enoch -c rhythmbox > /dev/null"
 
-  titles=('pincushion' 'fart-monger' 'malt-worm' "ne'er-do-well" 'lounge lizard' 'proprietary-software-user' 'rapscallion' 'curmudgeon' 'bladder' 'usurper' 'Avogadro-admirer' 'sheep-biter' 'pomegranate' 'durian' 'reaver' 'mountain of mad flesh' 'bureaucrat' 'catamite' 'codpiece' 'baseball-scorner')
-  num_titles=${#titles[*]}
+# kill caps when it's on
+alias FUCKCAPSLOCK="python -c 'from ctypes import *; X11 = cdll.LoadLibrary(\"libX11.so.6\"); display = X11.XOpenDisplay(None); X11.XkbLockModifiers(display, c_uint(0x0100), c_uint(2), c_uint(0)); X11.XCloseDisplay(display)'"
 
-  echo "Run jhbuild shell you ${insults[$((RANDOM%$num_insults))]} ${titles[$((RANDOM%$num_titles))]}"
-fi
+alias vt="vim ~/.todo/todo.txt ~/.todo/done.txt ~/.todo/report.txt -O"
+alias t="todo.sh"
+alias tl="todo.sh ls"
+alias ta="todo.sh a"
+
+alias gt="gnome-terminal"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -45,7 +50,11 @@ fi
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git)
 
-PATH=$PATH:/home/endless/.local/bin
+PATH=$PATH:~/.local/bin
 export DISPLAY=:0
 
 source $ZSH/oh-my-zsh.sh
+export PATH=$PATH:~/.cabal/bin:~/.xmonad/bin
+export DEBEMAIL="will@endlessm.com"
+
+source ~/.profile
