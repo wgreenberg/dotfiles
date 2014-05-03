@@ -9,10 +9,6 @@ set laststatus=2
 set background=dark
 colorscheme solarized
 
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
-
 noremap <leader>s :VimuxPromptCommand<cr>
 noremap <leader>q :VimuxInterruptRunner<cr>:VimuxCloseRunner<cr>
 noremap <leader>w :VimuxInterruptRunner<cr>
