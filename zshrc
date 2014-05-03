@@ -57,4 +57,7 @@ source $ZSH/oh-my-zsh.sh
 export PATH=$PATH:~/.cabal/bin:~/.xmonad/bin
 export DEBEMAIL="will@endlessm.com"
 
-source ~/.profile
+# Golang stuff
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:/usr/local/go/bin
