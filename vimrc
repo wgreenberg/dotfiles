@@ -15,6 +15,7 @@ noremap <leader>w :VimuxInterruptRunner<cr>
 noremap <leader><leader> :wa<cr>:VimuxRunLastCommand<cr>
 
 set number
+set colorcolumn=80
 set backspace=indent,eol,start
 set expandtab
 set tabstop=4
