@@ -1,6 +1,8 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
+zstyle ':completion:*' menu select=2
+
 bindkey -v
 
 # really fucking tired of autocorrect
@@ -13,37 +15,83 @@ unsetopt correct_all
 ZSH_THEME="minimal"
 alias tmux="export TERM=screen-256color-bce; tmux"
 
+alias datafart='curl --data-binary @- datafart.com'
+
 # jhbuild's gstreamer ain't got mp3 going for it
 alias muzak="sudo su enoch -c rhythmbox > /dev/null"
 
 # kill caps when it's on
 alias FUCKCAPSLOCK="python -c 'from ctypes import *; X11 = cdll.LoadLibrary(\"libX11.so.6\"); display = X11.XOpenDisplay(None); X11.XkbLockModifiers(display, c_uint(0x0100), c_uint(2), c_uint(0)); X11.XCloseDisplay(display)'"
 
-alias vt="vim ~/.todo/todo.txt ~/.todo/done.txt ~/.todo/report.txt -O"
-alias t="todo.sh"
-alias tl="todo.sh ls"
-alias ta="todo.sh a"
+alias jot=$HOME/Documents/notes/jot
+alias todo="jot todo"
+alias t="todo"
+_todo_cpl () {
+    if [ -z $1 ]; then
+        reply=($(ls $HOME/Documents/notes/*.md | xargs -n1 basename | sed 's/.md$//'))
+    else
+        reply=($(ls $HOME/Documents/notes/*.md | grep $1 | xargs -n1 basename | sed 's/.md$//'))
+    fi
+}
+compctl -U -K _todo_cpl jot
 
 alias gt="gnome-terminal"
 
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias vi="vim"
 
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
+DISABLE_AUTO_UPDATE="true"
 
-# Comment this out to disable weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
+# hurl - curl but only headers
+hurl () {
+    curl -s -D - $1 -o /dev/null
+}
 
-# Uncomment following line if you want to disable colors in ls
-# DISABLE_LS_COLORS="true"
+# Setup goto function with autocompletion in projects directory
+PROJ_DIR=$HOME/checkout
+goto () {
+    if [ -d $PROJ_DIR/$1 ]; then
+        cd $PROJ_DIR/$1;
+        if [ -d $PROJ_DIR/$1/.git ]; then
+            git --no-pager log -n 1;
+            git status;
+        fi
+    else
+        echo "no dice"
+    fi
+}
 
-# Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
+_goto_cpl () {
+    reply=($(ls $PROJ_DIR | py -fx "'${1}' in x"))
+}
+compctl -U -K _goto_cpl goto
 
-# Uncomment following line if you want red dots to be displayed while waiting for completion
-# COMPLETION_WAITING_DOTS="true"
+# alert sends a notification, use after long running jobs
+alert () {
+    message=DONE
+    if [ ! -z $1 ]; then
+        message=$1
+    fi
+    zenity --notification --text=${message} --timeout=3
+}
+
+igrep () {
+    case "$1" in
+        -t|--today)
+            TODAY=1
+            SEARCH=$2
+        ;;
+        *)
+            TODAY=0
+            SEARCH=$1
+        ;;
+    esac
+    IRC_LOGS_DIR=$HOME/.xchat2/xchatlogs
+    if [ $TODAY -eq 1 ]; then
+        grep "$(date +'%b %d')" $IRC_LOGS_DIR/*.log | grep $SEARCH
+    else
+        grep $SEARCH $IRC_LOGS_DIR/*.log
+    fi
+}
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
