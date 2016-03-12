@@ -1,0 +1,22 @@
+[user]
+	email = will@endlessm.com
+	name = Will Greenberg
+[core]
+	editor = vim
+[color]
+	ui = true
+[advice]
+	statusHints = false
+[alias]
+    reup = !git fetch && git reset --hard @{upstream}
+    nuke = clean -xdf
+    publish = push --set-upstream origin HEAD
+    ri = rebase -i
+    rim = rebase -i master
+    fix = commit --amend --no-edit
+    wip = !bash -c 'git commit -m \"wip $1\"' -
+    resh = rebase -i --autosquash
+    reshm = rebase -i --autosquash master
+    cofix = commit --fixup
+[init]
+	templatedir = ~/.git_templates
