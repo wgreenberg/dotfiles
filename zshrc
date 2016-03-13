@@ -17,12 +17,6 @@ alias tmux="export TERM=screen-256color-bce; tmux"
 
 alias datafart='curl --data-binary @- datafart.com'
 
-# jhbuild's gstreamer ain't got mp3 going for it
-alias muzak="sudo su enoch -c rhythmbox > /dev/null"
-
-# kill caps when it's on
-alias FUCKCAPSLOCK="python -c 'from ctypes import *; X11 = cdll.LoadLibrary(\"libX11.so.6\"); display = X11.XOpenDisplay(None); X11.XkbLockModifiers(display, c_uint(0x0100), c_uint(2), c_uint(0)); X11.XCloseDisplay(display)'"
-
 alias jot=$HOME/Documents/notes/jot
 alias todo="jot todo"
 alias t="todo"
