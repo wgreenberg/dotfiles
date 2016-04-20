@@ -1,6 +1,8 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
+PATH=$PATH:~/.local/bin
+
 zstyle ':completion:*' menu select=2
 
 bindkey -v
@@ -65,7 +67,7 @@ alert () {
     if [ ! -z $1 ]; then
         message=$1
     fi
-    zenity --notification --text=${message} --timeout=3
+    notify-send "${message}"
 }
 
 igrep () {
@@ -92,7 +94,6 @@ igrep () {
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git)
 
-PATH=$PATH:~/.local/bin
 export DISPLAY=:0
 
 source $ZSH/oh-my-zsh.sh
@@ -103,3 +104,6 @@ export DEBEMAIL="will@endlessm.com"
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:/usr/local/go/bin
+
+# caps lock => ctrl
+setxkbmap -option ctrl:nocaps

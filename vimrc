@@ -1,4 +1,5 @@
 filetype on
+filetype plugin on
 execute pathogen#infect()
 
 syntax on
