@@ -1,7 +1,7 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
-PATH=$PATH:~/.local/bin
+PATH=~/.local/bin:~/.local/sbin:$PATH
 
 zstyle ':completion:*' menu select=2
 
@@ -30,10 +30,6 @@ _todo_cpl () {
     fi
 }
 compctl -U -K _todo_cpl jot
-
-alias gt="gnome-terminal"
-
-alias vi="vim"
 
 DISABLE_AUTO_UPDATE="true"
 
@@ -70,40 +66,9 @@ alert () {
     notify-send "${message}"
 }
 
-igrep () {
-    case "$1" in
-        -t|--today)
-            TODAY=1
-            SEARCH=$2
-        ;;
-        *)
-            TODAY=0
-            SEARCH=$1
-        ;;
-    esac
-    IRC_LOGS_DIR=$HOME/.xchat2/xchatlogs
-    if [ $TODAY -eq 1 ]; then
-        grep "$(date +'%b %d')" $IRC_LOGS_DIR/*.log | grep $SEARCH
-    else
-        grep $SEARCH $IRC_LOGS_DIR/*.log
-    fi
-}
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
+# oh-my-zsh plugins
 plugins=(git)
 
 export DISPLAY=:0
 
 source $ZSH/oh-my-zsh.sh
-export PATH=$PATH:~/.cabal/bin:~/.xmonad/bin
-export DEBEMAIL="will@endlessm.com"
-
-# Golang stuff
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:/usr/local/go/bin
-
-# caps lock => ctrl
-setxkbmap -option ctrl:nocaps

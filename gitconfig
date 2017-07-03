@@ -18,5 +18,5 @@
     resh = rebase -i --autosquash
     reshm = rebase -i --autosquash master
     cofix = commit --fixup
-[init]
-	templatedir = ~/.git_templates
+[push]
+	default = simple

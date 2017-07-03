@@ -28,13 +28,14 @@ nnoremap <A-x> <C-x>
 
 noremap <C-p> :CtrlPMixed<cr>
 
-imap jk <esc>
-inoremap kj jk
-
 highlight ExtraWhitespace ctermbg=red guibg=red
 
 " Show trailing whitespace:
 match ExtraWhitespace /\s\+$/
+
+" Make tab characters visible
+set list
+set listchars=tab:>-
 
 set number
 set colorcolumn=80
@@ -45,13 +46,26 @@ set shiftwidth=4
 set autoindent
 set smarttab
 
-au BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd BufNewFile,BufReadPost *.am.inc set filetype=make
 
-set wildignore+=*node_modules/*,*.lo,*.o,*.so
+set wildignore+=.lo,*.o,*.so
 let NERDTreeIgnore=['\.pyc$', '\.pyo$', '\.class$', '\.o$', '\~$']
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+let g:ctrlp_custom_ignore=['node_modules']
 map <C-n> :NERDTreeToggle<cr>
+
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+" Enable omni completion.
+
+" Close preview after autocompletion is done
+autocmd CompleteDone * pclose
 
 set nobackup
 set noswapfile
