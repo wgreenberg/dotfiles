@@ -1,12 +1,12 @@
 [user]
-	email = will@endlessm.com
-	name = Will Greenberg
+    email = ifnspifn@gmail.com
+    name = Will Greenberg
 [core]
-	editor = vim
+    editor = vim
 [color]
-	ui = true
+    ui = true
 [advice]
-	statusHints = false
+    statusHints = false
 [alias]
     reup = !git fetch && git reset --hard @{upstream}
     nuke = clean -xdf
@@ -19,4 +19,4 @@
     reshm = rebase -i --autosquash master
     cofix = commit --fixup
 [push]
-	default = simple
+    default = simple

@@ -5,11 +5,9 @@ execute pathogen#infect()
 syntax on
 let g:Powerline_symbols='fancy'
 set nocompatible
-set t_Co=16
 set laststatus=2
 colorscheme solarized
-set background=dark
-let g:solarized_termcolors=256
+set background=light
 
 noremap <leader>s :VimuxPromptCommand<cr>
 noremap <leader>q :VimuxInterruptRunner<cr>:VimuxCloseRunner<cr>
@@ -21,12 +19,29 @@ noremap <leader>g :Gdiff<cr>
 noremap <leader>c :Gcommit<cr>
 noremap <leader>t :Gstatus<cr>
 
+:noremap <Space> :set hlsearch! hlsearch?<CR>
+
 noremap Q gq
 
 nnoremap <A-a> <C-a>
 nnoremap <A-x> <C-x>
 
 noremap <C-p> :CtrlPMixed<cr>
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_lost = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:rustfmt_autosave = 1
+let g:syntastic_rust_rustc_exe = 'cargo check'
+let g:syntastic_rust_rustc_fname = ''
+let g:syntastic_rust_rustc_args = '--'
+let g:syntastic_rust_checkers = ['rustc']
 
 highlight ExtraWhitespace ctermbg=red guibg=red
 

@@ -1,6 +1,3 @@
-# Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
-
 PATH=~/.local/bin:~/.local/sbin:$PATH
 
 zstyle ':completion:*' menu select=2
@@ -9,13 +6,6 @@ bindkey -v
 
 # really fucking tired of autocorrect
 unsetopt correct_all
-
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="minimal"
-alias tmux="export TERM=screen-256color-bce; tmux"
 
 alias datafart='curl --data-binary @- datafart.com'
 
@@ -57,18 +47,15 @@ _goto_cpl () {
 }
 compctl -U -K _goto_cpl goto
 
-# alert sends a notification, use after long running jobs
-alert () {
-    message=DONE
-    if [ ! -z $1 ]; then
-        message=$1
-    fi
-    notify-send "${message}"
-}
+bindkey -v
+bindkey '^R' history-incremental-search-backward
 
-# oh-my-zsh plugins
-plugins=(git)
+setopt inc_append_history
+setopt share_history
 
 export DISPLAY=:0
 
+export ZSH=$HOME/.oh-my-zsh
+ZSH_THEME="minimal"
+plugins=(git)
 source $ZSH/oh-my-zsh.sh
