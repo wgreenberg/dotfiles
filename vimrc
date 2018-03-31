@@ -1,13 +1,14 @@
 filetype on
 filetype plugin on
 execute pathogen#infect()
+execute pathogen#helptags()
 
 syntax on
 let g:Powerline_symbols='fancy'
 set nocompatible
 set laststatus=2
 colorscheme solarized
-set background=light
+set background=dark
 
 noremap <leader>s :VimuxPromptCommand<cr>
 noremap <leader>q :VimuxInterruptRunner<cr>:VimuxCloseRunner<cr>
@@ -33,15 +34,17 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_lost = 1
+let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_auto_jump = 0
 
 let g:rustfmt_autosave = 1
 let g:syntastic_rust_rustc_exe = 'cargo check'
 let g:syntastic_rust_rustc_fname = ''
 let g:syntastic_rust_rustc_args = '--'
 let g:syntastic_rust_checkers = ['rustc']
+let g:syntastic_rust_rustc_quiet_messages = { "level": "warnings" }
 
 highlight ExtraWhitespace ctermbg=red guibg=red
 
