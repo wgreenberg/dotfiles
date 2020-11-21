@@ -38,13 +38,12 @@ let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_auto_jump = 0
-
-let g:rustfmt_autosave = 1
-let g:syntastic_rust_rustc_exe = 'cargo check'
+let g:syntastic_rust_rustc_exe = 'cargo check --tests'
 let g:syntastic_rust_rustc_fname = ''
 let g:syntastic_rust_rustc_args = '--'
 let g:syntastic_rust_checkers = ['rustc']
 let g:syntastic_rust_rustc_quiet_messages = { "level": "warnings" }
+let g:syntastic_python_checkers=['flake8']
 
 highlight ExtraWhitespace ctermbg=red guibg=red
 
@@ -54,6 +53,20 @@ match ExtraWhitespace /\s\+$/
 " Make tab characters visible
 set list
 set listchars=tab:>-
+
+function! s:SetColorColumn()
+    if &textwidth == 0
+        setlocal colorcolumn=80
+    else
+        setlocal colorcolumn=+0
+    endif
+endfunction
+
+augroup colocolumn
+    autocmd!
+    autocmd OptionSet textwidth call s:SetColorColumn()
+    autocmd BufEnter * call s:SetColorColumn()
+augroup end
 
 set number
 set colorcolumn=80

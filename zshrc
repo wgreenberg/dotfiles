@@ -1,6 +1,8 @@
-PATH=~/.local/bin:~/.local/sbin:$PATH
+PATH=~/.local/bin:~/.local/sbin:$PATH:~/go/bin
 
 zstyle ':completion:*' menu select=2
+
+export EDITOR=vim
 
 bindkey -v
 
@@ -29,7 +31,7 @@ hurl () {
 }
 
 # Setup goto function with autocompletion in projects directory
-PROJ_DIR=$HOME/checkout
+PROJ_DIR=$HOME/dev
 goto () {
     if [ -d $PROJ_DIR/$1 ]; then
         cd $PROJ_DIR/$1;
@@ -43,19 +45,28 @@ goto () {
 }
 
 _goto_cpl () {
-    reply=($(ls $PROJ_DIR | py -fx "'${1}' in x"))
+    reply=($(find $PROJ_DIR -maxdepth 2 | awk -F "$PROJ_DIR/" '{print $2}' | grep "$1"))
 }
 compctl -U -K _goto_cpl goto
+
+wdiff() {
+  diff -s <(curl -s $1) <(curl -s $2)
+}
 
 bindkey -v
 bindkey '^R' history-incremental-search-backward
 
+alias alert=notify-send done
+
+alias ipa='ip a s label "[^br][^veth]*"'
+
 setopt inc_append_history
 setopt share_history
-
-export DISPLAY=:0
 
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="minimal"
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
+source $HOME/.cargo/env
+
+export GOPATH=$HOME/go
